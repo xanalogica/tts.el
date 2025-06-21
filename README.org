@@ -1,0 +1,28 @@
+#+TITLE: tts.el - Emacs Text-to-Speech via ElevenLabs or local CLI
+
+* Install
+
+#+begin_src emacs-lisp
+(use-package tts
+  :straight (:host github :repo "YOUR-GITHUB-USER/tts.el")
+  :bind (("s-t" . tts-speak)
+         ("s-p" . tts-pause)
+         ("s-r" . tts-resume)
+         ("s-SPC" . tts-toggle-play))
+  :config
+  (setq tts-backend 'elevenlabs
+        tts-elevenlabs-api-key "your-api-key"
+        tts-elevenlabs-default-voice-id "EXAVITQu4vr4xnSDxMaL"
+        tts-elevenlabs-voices
+        '(("Rachel" . "EXAVITQu4vr4xnSDxMaL")
+          ("Domi"   . "AZnzlk1XvdvUeBnXmlld")))
+  (tts-mode 1))  ;; Enable mode-line integration
+#+end_src
+
+* Features
+
+- Speak selected region or from point to end
+- Pause, resume, toggle playback
+- Voice selection support
+- Works with ElevenLabs or local engines (e.g. Piper, espeak)
+- Mode-line indicator for status
