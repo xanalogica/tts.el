@@ -88,7 +88,7 @@
         (lambda (_e _m)
           (setq tts--current-process nil)
           (tts--update-mode-line nil)
-          (tts--play-next))))))
+          (tts--play-next)))))))
 
 (defun tts--queue-job (job)
   "Add JOB to playback queue and trigger if idle."
