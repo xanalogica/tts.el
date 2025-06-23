@@ -1,0 +1,27 @@
+# contrib/tts-piper.service
+# ------------------------------------------------------------
+# Systemd unit that starts (and keeps running) the docker-compose
+# stack for tts.el — currently just the single “piper” service.
+# ------------------------------------------------------------
+
+[Unit]
+Description=Piper TTS docker-compose stack (for tts.el)
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+# Path where you installed / copied docker-compose.yml
+WorkingDirectory=/opt/tts-el
+# Start the stack in detached mode
+ExecStart=/usr/bin/docker compose up -d
+# Stop the stack cleanly
+ExecStop=/usr/bin/docker compose down
+# systemd should consider the service “active” after ExecStart finishes
+RemainAfterExit=yes
+# Make Docker restart containers automatically, but systemd itself
+# doesn’t need to restart this oneshot unit.
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

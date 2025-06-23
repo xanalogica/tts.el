@@ -1,0 +1,9 @@
+services:
+  piper:
+    image: rhasspy/wyoming-piper
+    command: --voice en_US-lessac-medium --data-dir /data
+    restart: unless-stopped
+    ports:
+      - "10200:10200"
+    volumes:
+      - /var/lib/tts-piper:/data          #  ←  global cache lives here
